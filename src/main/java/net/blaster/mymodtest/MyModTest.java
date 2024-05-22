@@ -1,6 +1,10 @@
 package net.blaster.mymodtest;
 
 import net.blaster.mymodtest.Item.ModItems;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.level.ItemLike;
+import net.neoforged.neoforge.common.CreativeModeTabRegistry;
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
@@ -56,7 +60,9 @@ public class MyModTest
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
-
+        if(event.getTabKey()== CreativeModeTabs.INGREDIENTS){
+            event.accept((ItemLike) ModItems.NeverKey);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

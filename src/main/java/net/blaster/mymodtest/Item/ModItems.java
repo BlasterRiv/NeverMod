@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.createItems(MyModTest.MOD_ID);
     public static final DeferredHolder<Item,Item> NeverKey = ITEMS.register(
-            "NeverKeyItem", () -> new Item(new Item.Properties(
+            "neverkey", () -> new Item(new Item.Properties(
 
             ).stacksTo(1)
         )
