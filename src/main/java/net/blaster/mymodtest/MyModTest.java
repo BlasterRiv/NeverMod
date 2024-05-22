@@ -1,9 +1,6 @@
 package net.blaster.mymodtest;
 
-import net.neoforged.fml.ModList;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
-
 import com.mojang.logging.LogUtils;
 
 import net.minecraft.client.Minecraft;
@@ -32,7 +29,7 @@ public class MyModTest
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
-    public MyModTest(IEventBus modEventBus,IEventBus baseBus, ModContainer modContainer)
+    public MyModTest(IEventBus modEventBus, ModContainer modContainer)
     {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -75,9 +72,9 @@ public class MyModTest
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-            // Some client setup code
-            LOGGER.info("HELLO FROM CLIENT SETUP");
-            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+//            // Some client setup code
+//            LOGGER.info("HELLO FROM CLIENT SETUP");
+//            LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
     }
 }
