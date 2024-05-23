@@ -1,5 +1,6 @@
 package net.blaster.mymodtest;
 
+import net.blaster.mymodtest.Item.ModCreativeTab;
 import net.blaster.mymodtest.Item.ModItems;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -49,6 +50,7 @@ public class MyModTest
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        ModCreativeTab.CREATIVE_MODE_TAB_DEFERRED_REGISTER.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
     }
 
