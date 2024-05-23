@@ -1,6 +1,6 @@
-package net.blaster.mymodtest.Item;
+package net.blaster.nevermod.Item;
 
-import net.blaster.mymodtest.MyModTest;
+import net.blaster.nevermod.NeverMod;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -9,11 +9,11 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModCreativeTab {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TAB_DEFERRED_REGISTER =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MyModTest.MOD_ID);
+    public static final DeferredRegister<CreativeModeTab> MOD_CREATIVE_MODE_TAB =
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, NeverMod.MOD_ID);
 
     public static final DeferredHolder<CreativeModeTab,CreativeModeTab> CREATIVE_MODE_TAB_DEFERRED_HOLDER =
-             CREATIVE_MODE_TAB_DEFERRED_REGISTER.register(
+             MOD_CREATIVE_MODE_TAB.register(
                      "never_tab",
                      ()->CreativeModeTab.builder()
                              .icon(()->new ItemStack(ModItems.NeverKey.get()))

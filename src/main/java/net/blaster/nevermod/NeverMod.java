@@ -1,15 +1,12 @@
-package net.blaster.mymodtest;
+package net.blaster.nevermod;
 
-import net.blaster.mymodtest.Item.ModCreativeTab;
-import net.blaster.mymodtest.Item.ModItems;
-import net.minecraft.world.item.CreativeModeTab;
+import net.blaster.nevermod.Item.ModCreativeTab;
+import net.blaster.nevermod.Item.ModItems;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.common.CreativeModeTabRegistry;
 import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
-import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -24,18 +21,18 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
-@Mod(MyModTest.MOD_ID)
-public class MyModTest
+@Mod(NeverMod.MOD_ID)
+public class NeverMod
 {
     // Define mod id in a common place for everything to reference
-    public static final String MOD_ID = "mymodtest";
+    public static final String MOD_ID = "nevermod";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
-    public MyModTest(IEventBus modEventBus, ModContainer modContainer)
+    public NeverMod(IEventBus modEventBus, ModContainer modContainer)
     {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
@@ -50,7 +47,7 @@ public class MyModTest
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-        ModCreativeTab.CREATIVE_MODE_TAB_DEFERRED_REGISTER.register(modEventBus);
+        ModCreativeTab.MOD_CREATIVE_MODE_TAB.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
     }
 
