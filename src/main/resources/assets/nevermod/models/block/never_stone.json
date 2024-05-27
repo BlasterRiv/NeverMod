@@ -1,0 +1,6 @@
+{
+"parents":"minecraft:block/cube_all",
+  "texture": {
+    "all": "nevermod:block/never_stone"
+  }
+}

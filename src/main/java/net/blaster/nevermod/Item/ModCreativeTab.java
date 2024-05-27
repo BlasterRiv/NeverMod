@@ -1,6 +1,7 @@
 package net.blaster.nevermod.Item;
 
 import net.blaster.nevermod.NeverMod;
+import net.blaster.nevermod.blocks.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -20,6 +21,8 @@ public class ModCreativeTab {
                              .title(Component.translatable("creativetab.never_tab"))
                              .displayItems((pParameters, pOutput) ->{
                                  pOutput.accept(ModItems.NeverKey.get());
+                                 pOutput.accept(ModBlocks.NeverBlock.get());
+
                              })
                              .build()
              );

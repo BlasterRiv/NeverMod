@@ -9,9 +9,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.createItems(NeverMod.MOD_ID);
     public static final DeferredHolder<Item,Item> NeverKey = ITEMS.register(
-            "neverkey", () -> new Item(new Item.Properties(
-
-            ).stacksTo(1)
+            "neverkey", () -> new Item(new Item.Properties()
+                    .stacksTo(1)
         )
     );
 }
