@@ -22,6 +22,8 @@ public class ModCreativeTab {
                              .displayItems((pParameters, pOutput) ->{
                                  pOutput.accept(ModItems.NeverKey.get());
                                  pOutput.accept(ModBlocks.NeverBlock.get());
+                                 pOutput.accept(ModItems.AncientGold.get());
+                                 pOutput.accept(ModItems.RawAncientGold.get());
 
                              })
                              .build()

@@ -2,6 +2,7 @@ package net.blaster.nevermod;
 
 import net.blaster.nevermod.Item.ModCreativeTab;
 import net.blaster.nevermod.Item.ModItems;
+import net.blaster.nevermod.blocks.ModBlocks;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.ItemLike;
 import org.slf4j.Logger;
@@ -49,6 +50,7 @@ public class NeverMod
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         ModCreativeTab.MOD_CREATIVE_MODE_TAB.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
+        ModBlocks.BLOCS.register(modEventBus);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)

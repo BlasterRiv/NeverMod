@@ -1,0 +1,6 @@
+{
+  "Parent": "item/generated",
+    "texture": {
+      "layer0": "nevermod:item/ancient_gold"
+    }
+}

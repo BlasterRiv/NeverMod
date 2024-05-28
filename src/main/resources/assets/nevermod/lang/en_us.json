@@ -1,6 +1,11 @@
 {
   "item.nevermod.neverkey": "Never Key",
 
+  "item.nevermod.raw_ancient_gold": "Raw Ancient Gold",
+  "item.nevermod.ancient_gold": "Ancient Gold",
+
+
+
   "block.nevermod.never_stone": "Never Stone",
 
   "creativetab.never_tab": "Never Tab"

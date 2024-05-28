@@ -20,16 +20,16 @@ public class ModBlocks {
     //public static final  DeferredBlock<Block> NeverBlock = BLOCS.register("neverkey",()->new Block( BlockBehaviour.Properties.of()));
 
     public static final  DeferredBlock<Block> NeverBlock = registerMyBlock("never_stone",()->new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE)
-            .destroyTime(99)));
+            .destroyTime(30)));
 
     private static <T extends Block> DeferredBlock<Block> registerMyBlock(String name, Supplier<T> blockSupplier){
         DeferredBlock<Block> toReturn = BLOCS.register(name, blockSupplier);
-        registerMyBlockItem(name,toReturn);
+        registerMyBlockItem(toReturn);
         return toReturn;
     }
 
-    private static DeferredHolder<Item,Item> registerMyBlockItem(String name, DeferredBlock<Block> block){
-        return ModItems.ITEMS.register("",()-> new BlockItem(block.get(),new Item.Properties()));
+    private static DeferredItem<BlockItem> registerMyBlockItem(DeferredBlock<Block> block){
+        return ModItems.ITEMS.registerSimpleBlockItem(block);
     }
     //private static <T extends Block> <Item> registerMyBlockItem(){}
 }
