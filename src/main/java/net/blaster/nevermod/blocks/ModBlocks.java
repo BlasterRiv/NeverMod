@@ -20,7 +20,7 @@ public class ModBlocks {
     //public static final  DeferredBlock<Block> NeverBlock = BLOCS.register("neverkey",()->new Block( BlockBehaviour.Properties.of()));
 
     public static final  DeferredBlock<Block> NeverBlock = registerMyBlock("never_stone",()->new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE)
-            .destroyTime(30)));
+            .destroyTime(5)));
 
     private static <T extends Block> DeferredBlock<Block> registerMyBlock(String name, Supplier<T> blockSupplier){
         DeferredBlock<Block> toReturn = BLOCS.register(name, blockSupplier);

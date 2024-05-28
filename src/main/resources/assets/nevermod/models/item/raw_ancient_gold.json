@@ -1,6 +1,6 @@
 {
-  "Parent": "item/generated",
-    "texture": {
-      "layer0": "nevermod:item/raw_ancient_gold"
-    }
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "nevermod:item/raw_ancient_gold"
+  }
 }
