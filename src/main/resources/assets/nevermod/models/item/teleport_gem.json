@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
     "textures": {
-      "layer0": "nevermod:item/ancient_gold"
+      "layer0": "nevermod:item/teleport_gem"
     }
 }

@@ -1,6 +1,12 @@
 {
   "item.nevermod.neverkey": "Never Key",
 
+  "item.nevermod.power_gem": "Power Gem",
+  "item.nevermod.dimension_gem": "Dimension Gem",
+  "item.nevermod.teleport_gem": "Teleport Gem",
+  "item.nevermod.linking_gem": "Linking Gem",
+
+
   "item.nevermod.raw_ancient_gold": "Raw Ancient Gold",
   "item.nevermod.ancient_gold": "Ancient Gold",
 
