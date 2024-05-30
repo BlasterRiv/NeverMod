@@ -23,6 +23,7 @@ public class NeverKeyItem extends Item {
             if(pContext.getLevel().getBlockState(clickedPos).getBlock().getClass()==DoorBlock.class){
                 if (player != null) {
                     player.sendSystemMessage(Component.literal("IS A DOOR"));
+                    return InteractionResult.SUCCESS;
                 }
             }
             else {
@@ -30,7 +31,7 @@ public class NeverKeyItem extends Item {
             }
 
         }
-        return super.useOn(pContext);
+        return InteractionResult.FAIL;
     }
 
 }
