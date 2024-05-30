@@ -1,5 +1,6 @@
 package net.blaster.nevermod.Item;
 
+import net.blaster.nevermod.Item.NeverItems.NeverKeyItem;
 import net.blaster.nevermod.NeverMod;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -16,7 +17,7 @@ public class ModItems {
     private static final Item.Properties deffPropertiesRareSinglet =new Item.Properties().stacksTo(1).rarity(Rarity.EPIC);
 
     public static final DeferredHolder<Item,Item> NeverKey = ITEMS.register(
-            "neverkey", () -> new Item(new Item.Properties()
+            "neverkey", () -> new NeverKeyItem(new Item.Properties()
                     .stacksTo(1)
                     .rarity(Rarity.EPIC)
         ));
@@ -31,3 +32,10 @@ public class ModItems {
     public static final DeferredItem<Item> RawAncientGold = ITEMS.registerSimpleItem("raw_ancient_gold",new Item.Properties());
 
 }
+/*
+*
+*
+*
+*
+*
+* */
