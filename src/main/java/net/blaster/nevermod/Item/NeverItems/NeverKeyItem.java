@@ -1,13 +1,17 @@
 package net.blaster.nevermod.Item.NeverItems;
 
+import net.blaster.nevermod.blocks.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import org.apache.commons.compress.compressors.lz77support.LZ77Compressor;
 
 public class NeverKeyItem extends Item {
@@ -23,6 +27,7 @@ public class NeverKeyItem extends Item {
             if(pContext.getLevel().getBlockState(clickedPos).getBlock().getClass()==DoorBlock.class){
                 if (player != null) {
                     player.sendSystemMessage(Component.literal("IS A DOOR"));
+                    pContext.getLevel().setBlockAndUpdate(clickedPos,ModBlocks.NeverDoor.get().defaultBlockState());
                     return InteractionResult.SUCCESS;
                 }
             }
@@ -33,5 +38,6 @@ public class NeverKeyItem extends Item {
         }
         return InteractionResult.FAIL;
     }
+
 
 }

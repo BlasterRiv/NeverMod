@@ -7,7 +7,9 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.neoforged.neoforge.registries.*;
 
 import java.util.function.Supplier;
@@ -23,17 +25,17 @@ public class ModBlocks {
 
     ));
 
-
+    public static final DeferredBlock<DoorBlock> NeverDoor = registerMyBlock("never_door",()->new DoorBlock(BlockSetType.IRON,BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_DOOR)));
 
 
     //helper methods
-    private static <T extends Block> DeferredBlock<Block> registerMyBlock(String name, Supplier<T> blockSupplier){
-        DeferredBlock<Block> toReturn = BLOCS.register(name, blockSupplier);
+    private static <T extends Block> DeferredBlock<T> registerMyBlock(String name, Supplier<T> blockSupplier){
+        DeferredBlock<T> toReturn = BLOCS.register(name, blockSupplier);
         registerMyBlockItem(toReturn);
         return toReturn;
     }
 
-    private static DeferredItem<BlockItem> registerMyBlockItem(DeferredBlock<Block> block){
+    private static <T extends Block> DeferredItem<BlockItem> registerMyBlockItem(DeferredBlock<T> block){
         return ModItems.ITEMS.registerSimpleBlockItem(block);
     }
 

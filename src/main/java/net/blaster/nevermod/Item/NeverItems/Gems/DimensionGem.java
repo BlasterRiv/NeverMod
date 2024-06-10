@@ -1,13 +1,10 @@
 package net.blaster.nevermod.Item.NeverItems.Gems;
-
 import net.minecraft.world.item.Item;
 
-public class GemsItem extends Item {
-    public GemsItem(Properties pProperties) {
+public class DimensionGem extends Item implements GemsItemInterface {
+    public DimensionGem(Properties pProperties) {
         super(pProperties);
     }
-
+    
 
 }
-
-

@@ -27,6 +27,7 @@ public class ModCreativeTab {
 
 
                                  pOutput.accept(ModBlocks.NeverBlock.get());
+                                 pOutput.accept(ModBlocks.NeverDoor.get());
 
                                  pOutput.accept(ModItems.AncientGold.get());
                                  pOutput.accept(ModItems.RawAncientGold.get());
