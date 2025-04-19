@@ -22,7 +22,6 @@ public class ModBlocks {
     //blocks
     public static final  DeferredBlock<Block> NeverBlock = registerMyBlock("never_stone",()->new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE)
             .destroyTime(50)
-
     ));
 
     public static final DeferredBlock<DoorBlock> NeverDoor = registerMyBlock("never_door",()->new DoorBlock(BlockSetType.IRON,BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_DOOR)));
