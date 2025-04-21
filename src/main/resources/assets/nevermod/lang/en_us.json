@@ -15,5 +15,7 @@
   "block.nevermod.never_stone": "Never Stone",
   "block.nevermod.never_door": "Never Door",
 
-  "creativetab.never_tab": "Never Tab"
+  "creativetab.never_tab": "Never Tab",
+
+  "tooltip.nevermod.linking_gem":"hold down shift for mob"
 }

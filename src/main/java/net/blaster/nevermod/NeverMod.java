@@ -3,6 +3,7 @@ package net.blaster.nevermod;
 import net.blaster.nevermod.Item.ModCreativeTab;
 import net.blaster.nevermod.Item.ModItems;
 import net.blaster.nevermod.blocks.ModBlocks;
+import net.blaster.nevermod.util.NeverItemProp;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.ItemLike;
 import org.slf4j.Logger;
@@ -43,14 +44,17 @@ public class NeverMod
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
 
+
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
         ModCreativeTab.MOD_CREATIVE_MODE_TAB.register(modEventBus);
+        NeverItemProp.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModBlocks.BLOCS.register(modEventBus);
+
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)

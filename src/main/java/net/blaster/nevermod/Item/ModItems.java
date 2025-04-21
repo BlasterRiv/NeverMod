@@ -6,9 +6,9 @@ import net.blaster.nevermod.Item.NeverItems.Gems.PowerGem;
 import net.blaster.nevermod.Item.NeverItems.Gems.TeleportGem;
 import net.blaster.nevermod.Item.NeverItems.NeverKeyItem;
 import net.blaster.nevermod.NeverMod;
+import net.blaster.nevermod.util.NeverItemProp;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.level.block.DoorBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -29,7 +29,7 @@ public class ModItems {
     public static final DeferredItem<Item> PowerGem = ITEMS.registerItem("power_gem",gemItem -> new PowerGem(deffPropertiesRareSinglet));
     public static final DeferredItem<Item> DimensionGem = ITEMS.register("dimension_gem",()->new DimensionGem(deffPropertiesRareSinglet));
     public static final DeferredItem<Item> TeleportGem = ITEMS.register("teleport_gem", ()->new TeleportGem(deffPropertiesRareSinglet));
-    public static final DeferredItem<Item> LinkingGem = ITEMS.register("linking_gem",()->new LinkingGem(deffPropertiesRareSinglet));
+    public static final DeferredItem<Item> LinkingGem = ITEMS.register("linking_gem",()->new LinkingGem(deffPropertiesRareSinglet.component(NeverItemProp.GemId.get(),-1)));
 
 
 
