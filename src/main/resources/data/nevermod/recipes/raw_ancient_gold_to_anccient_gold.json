@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "category": "misc",
-  "cookingtime": 200,
-  "experience": 50,
-  "group": "ancient_gold",
-  "ingredient": {"item": "nevermod:raw_ancient_gold"},
-  "result": {"id": "nevermod:ancient_gold"}
-}

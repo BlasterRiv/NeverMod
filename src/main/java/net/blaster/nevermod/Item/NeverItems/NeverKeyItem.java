@@ -32,8 +32,8 @@ public class NeverKeyItem extends Item {
                     DoorBlock db= (DoorBlock) pContext.getLevel().getBlockState(clickedPos).getBlock();
                     if(db.isOpen(pContext.getLevel().getBlockState(clickedPos))){player.sendSystemMessage(Component.literal("DOOR MUST BE CLOSED"));  return InteractionResult.FAIL; }
                     if(ModBlocks.NeverDoor.value()== db){player.sendSystemMessage(Component.literal("Already Trasformed"));  return InteractionResult.FAIL; }
-                    pContext.getLevel().setBlockAndUpdate(clickedPos,ModBlocks.NeverDoor.value().defaultBlockState());
-                    pContext.getLevel().getBlockState(clickedPos);
+                    pContext.getLevel().setBlockAndUpdate(clickedPos,ModBlocks.NeverDoor.get().withPropertiesOf(pContext.getLevel().getBlockState(clickedPos)));
+
                     return InteractionResult.SUCCESS;
                 }
             }

@@ -2,9 +2,7 @@ package net.blaster.nevermod.blocks;
 
 import net.blaster.nevermod.Item.ModItems;
 import net.blaster.nevermod.NeverMod;
-import net.minecraft.core.Registry;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
@@ -20,11 +18,16 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCS = DeferredRegister.createBlocks(NeverMod.MOD_ID);
 
     //blocks
-    public static final  DeferredBlock<Block> NeverBlock = registerMyBlock("never_stone",()->new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE)
+    public static final  DeferredBlock<Block> NeverStone = registerMyBlock("never_stone",()->new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.END_STONE)
             .destroyTime(50)
     ));
 
-    public static final DeferredBlock<DoorBlock> NeverDoor = registerMyBlock("never_door",()->new DoorBlock(BlockSetType.IRON,BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_DOOR)));
+    public static final DeferredBlock<DoorBlock> NeverDoor = registerMyBlock("never_door",()->new DoorBlock(BlockSetType.IRON,BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_DOOR)
+            .noOcclusion()
+            .noLootTable()
+    ));
+    //datagen
+
 
 
     //helper methods

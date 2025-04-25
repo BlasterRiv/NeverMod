@@ -17,5 +17,6 @@
 
   "creativetab.never_tab": "Never Tab",
 
-  "tooltip.nevermod.linking_gem":"hold down shift for mob"
+  "tooltip.nevermod.linking_gem":"hold down shift for mob",
+  "tooltip.nevermod.teleport_gem":"hold down shift for BlockPos"
 }

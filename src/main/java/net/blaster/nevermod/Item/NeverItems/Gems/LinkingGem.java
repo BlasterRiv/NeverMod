@@ -5,8 +5,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -84,6 +86,12 @@ public class LinkingGem extends Item implements GemsItemInterface {
         }
         return InteractionResultHolder.fail(pPlayer.getItemInHand(pPlayer.getUsedItemHand()));
 
+    }
+
+    @Override
+    public void onDestroyed(ItemEntity itemEntity, DamageSource damageSource) {
+
+        super.onDestroyed(itemEntity, damageSource);
     }
 
     @Override

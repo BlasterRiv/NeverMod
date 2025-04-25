@@ -26,7 +26,7 @@ public class ModCreativeTab {
                                  pOutput.accept(ModItems.LinkingGem.get());
 
 
-                                 pOutput.accept(ModBlocks.NeverBlock.get());
+                                 pOutput.accept(ModBlocks.NeverStone.get());
                                  pOutput.accept(ModBlocks.NeverDoor.get());
 
                                  pOutput.accept(ModItems.AncientGold.get());

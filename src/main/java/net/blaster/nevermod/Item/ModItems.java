@@ -26,9 +26,9 @@ public class ModItems {
 
 
 
-    public static final DeferredItem<Item> PowerGem = ITEMS.registerItem("power_gem",gemItem -> new PowerGem(deffPropertiesRareSinglet));
-    public static final DeferredItem<Item> DimensionGem = ITEMS.register("dimension_gem",()->new DimensionGem(deffPropertiesRareSinglet));
-    public static final DeferredItem<Item> TeleportGem = ITEMS.register("teleport_gem", ()->new TeleportGem(deffPropertiesRareSinglet));
+    public static final DeferredItem<Item> PowerGem = ITEMS.registerItem("power_gem",gemItem -> new PowerGem(deffPropertiesRareSinglet.component(NeverItemProp.GemId.get(),-1)));
+    public static final DeferredItem<Item> DimensionGem = ITEMS.register("dimension_gem",()->new DimensionGem(deffPropertiesRareSinglet.component(NeverItemProp.GemId.get(),-1)));
+    public static final DeferredItem<Item> TeleportGem = ITEMS.register("teleport_gem", ()->new TeleportGem(deffPropertiesRareSinglet.component(NeverItemProp.GemId.get(),-1)));
     public static final DeferredItem<Item> LinkingGem = ITEMS.register("linking_gem",()->new LinkingGem(deffPropertiesRareSinglet.component(NeverItemProp.GemId.get(),-1)));
 
 
