@@ -14,19 +14,25 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class TeleportGem extends Item implements GemsItemInterface {
-    private final Map<Integer, BlockPos> BlockPosMap;
+    //private final Map<Integer, BlockPos> BlockPosMap;
+    //private static final IntegerProperty;
+    //private static final EnumProperty<> Dimention = EnumProperty.create("",Class<DimensionType> DimensionType);
+    //private static final Property<?> f= EnumProperty.create("",DIMEN);
 
     public TeleportGem(Properties pProperties) {
         super(pProperties);
-        BlockPosMap= new HashMap<Integer, BlockPos>();
+        //BlockPosMap= new HashMap<Integer, BlockPos>();
     }
 
 
@@ -43,13 +49,15 @@ public class TeleportGem extends Item implements GemsItemInterface {
         Player pPlayer= pContext.getPlayer();
         Level pLevel = pContext.getLevel();
         InteractionHand pUsedHand = pContext.getHand();
+        ItemStack stack = pPlayer.getItemInHand(pUsedHand);
         if(pLevel instanceof ServerLevel serverlevel){
-            int gemid=pPlayer.getItemInHand(pUsedHand).get(NeverItemProp.GemId);
+            int gemid=stack.get(NeverItemProp.GemId);
             if(gemid==-1){registerGem(pPlayer.getItemInHand(pUsedHand));}
 
             if(pPlayer.isCrouching()){
-                BlockPosMap.put(gemid,pContext.getClickedPos().above());
-                pPlayer.sendSystemMessage(Component.literal("set on "+BlockPosMap.get(gemid)));
+                stack.set(NeverItemProp.PositionHeld,pContext.getClickedPos().above());
+                stack.set(NeverItemProp.DimensionTypeHeld.get(),pLevel.dimensionType());
+                pPlayer.sendSystemMessage(Component.literal("set on "+stack.get(NeverItemProp.PositionHeld)));
                 return InteractionResult.SUCCESS;
             }
 
@@ -64,35 +72,44 @@ public class TeleportGem extends Item implements GemsItemInterface {
         //spawn a projectile going forwword
        // Player pPlayer = pContext.getPlayer();
        // Level pLevel=pContext.getLevel();
+        ItemStack stack = pPlayer.getItemInHand(pUsedHand);
         if(pLevel instanceof ServerLevel serverlevel){
-            int gemid=pPlayer.getItemInHand(pUsedHand).get(NeverItemProp.GemId);
+            int gemid=stack.get(NeverItemProp.GemId);
             if(gemid==-1){registerGem(pPlayer.getItemInHand(pUsedHand));}
 
             if(pPlayer.isCrouching()){
-                BlockPosMap.put(gemid,null);
+                stack.set(NeverItemProp.PositionHeld,null);
+                stack.set(NeverItemProp.DimensionTypeHeld.get(),null);
                 pPlayer.sendSystemMessage(Component.literal("Cleared "+gemid));
                 return InteractionResultHolder.success(pPlayer.getItemInHand(pPlayer.getUsedItemHand()));
             }
-            BlockPos blockPos=BlockPosMap.get(gemid);
+            if(stack.get(NeverItemProp.DimensionTypeHeld)!=pLevel.dimensionType())
+            {pPlayer.sendSystemMessage(Component.literal("can only teleport withen same diemension"));
+                return InteractionResultHolder.fail(pPlayer.getItemInHand(pPlayer.getUsedItemHand()));
+            }
+            BlockPos blockPos=stack.get(NeverItemProp.PositionHeld);
             pPlayer.teleportTo(blockPos.getX(),blockPos.getY(),blockPos.getZ());
             //pLevel.gameEvent(GameEvent.PROJECTILE_SHOOT, new Vec3(pPlayer.getX(),pPlayer.getY(),pPlayer.getZ()),GameEvent.Context.of(pPlayer));
-            pPlayer.sendSystemMessage(Component.literal("used"));
+            pPlayer.sendSystemMessage(Component.literal(pPlayer.level().dimension().toString()));
             //pLevel.addFreshEntity();
             return InteractionResultHolder.success(pPlayer.getItemInHand(pPlayer.getUsedItemHand()));
         }
 
         return InteractionResultHolder.fail(pPlayer.getItemInHand(pPlayer.getUsedItemHand()));
     }
-    public int registerGem(ItemStack stack){
-        BlockPosMap.put(BlockPosMap.size(), null);
-        return stack.set(NeverItemProp.GemId,BlockPosMap.size());
-    }
+//    public int registerGem(ItemStack stack){
+//        BlockPosMap.put(BlockPosMap.size(), null);
+//        return stack.set(NeverItemProp.GemId,BlockPosMap.size());
+//    }
+   public int registerGem(ItemStack stack){
+       return -1;
+   }
     @Override
     public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
         pTooltipComponents.add(1,Component.translatable("tooltip.nevermod.teleport_gem"));
         if(Screen.hasShiftDown()){
-            BlockPosMap.get(pStack.get(NeverItemProp.GemId));
-            pTooltipComponents.set(1,Component.literal(""+ BlockPosMap.get(pStack.get(NeverItemProp.GemId))));
+            //BlockPosMap.get(pStack.get(NeverItemProp.GemId));
+            pTooltipComponents.set(1,Component.literal("GemId: "+pStack.get(NeverItemProp.GemId)+" "+ pStack.get(NeverItemProp.PositionHeld)));
         }
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
     }

@@ -3,7 +3,12 @@ package net.blaster.nevermod.util;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.blaster.nevermod.NeverMod;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -24,7 +29,9 @@ public class NeverItemProp {
 
 
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<Integer>> GemId = register("gem_id", (builder) ->  (builder.persistent(GemCodec.INT)) );
-
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<BlockPos>>  PositionHeld = register("position_held", (builder) ->  (builder.persistent(BlockPos.CODEC)) );
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<DimensionType>> DimensionTypeHeld = register("dimensiontype_held", (builder) ->  (builder.persistent(DimensionType.DIRECT_CODEC)) );
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<ResourceKey<Level>>> ServerLevelHeld = register("serverlevel_held", (builder) ->  (builder.persistent(ServerLevel.RESOURCE_KEY_CODEC)) );
     //public static final DeferredHolder<DataComponentType<?>,DataComponentType<Mob>> Mobheld=register("mobheld", (mobBuilder) ->  (mobBuilder.persistent(myMobCodec2)) );
 
     private static <T>DeferredHolder<DataComponentType<?>,DataComponentType<T>> register(String name, UnaryOperator<DataComponentType.Builder<T>> builderUnaryOperator)

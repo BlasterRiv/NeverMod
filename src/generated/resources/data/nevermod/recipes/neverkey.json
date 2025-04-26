@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "nevermod:ancient_gold"
+    },
+    "$": [
+      {
+        "item": "nevermod:teleport_gem"
+      },
+      {
+        "item": "nevermod:linking_gem"
+      },
+      {
+        "item": "nevermod:dimension_gem"
+      }
+    ],
+    "&": {
+      "item": "nevermod:power_gem"
+    }
+  },
+  "pattern": [
+    "##&",
+    "$$$",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "nevermod:neverkey"
+  }
+}

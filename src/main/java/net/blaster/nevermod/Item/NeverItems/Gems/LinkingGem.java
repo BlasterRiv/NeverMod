@@ -22,6 +22,7 @@ import java.util.Map;
 
 public class LinkingGem extends Item implements GemsItemInterface {
     private final Map<Integer,Mob> MobMap;
+    //private static final BooleanProperty is;
 
     public LinkingGem(Properties pProperties) {
         super(pProperties);
@@ -50,7 +51,12 @@ public class LinkingGem extends Item implements GemsItemInterface {
         if(getMob(stackId) == (null)){
             setMob(stackId,(Mob) pInteractionTarget);
             pPlayer.sendSystemMessage(Component.literal("Target Linked " + getMob(stackId)));
+            pPlayer.getItemInHand(pUsedHand).set(NeverItemProp.DimensionTypeHeld.get(),pPlayer.level().dimensionType());
             return InteractionResult.SUCCESS;
+        }
+        if(pStack.get(NeverItemProp.DimensionTypeHeld)!=pPlayer.level().dimensionType())
+        {pPlayer.sendSystemMessage(Component.literal("can only swap withen same diemension"));
+            return InteractionResult.FAIL;
         }
 
         setMob(stackId,swapMob(stackId, (Mob) pInteractionTarget));
@@ -63,6 +69,7 @@ public class LinkingGem extends Item implements GemsItemInterface {
     }
     private void setMob(int id,Mob mob){
         MobMap.put(id,mob);
+        //pPlayer.getItemInHand(pUsedHand).set(NeverItemProp.DimensionTypeHeld.get(),pPlayer.level().dimensionType());
     }
     private Mob swapMob(int id,Mob newMob){
         Mob ogMob=getMob(id);
@@ -80,6 +87,7 @@ public class LinkingGem extends Item implements GemsItemInterface {
         if(!pLevel.isClientSide) {
             if (pPlayer.isCrouching()) {
                 setMob(pPlayer.getMainHandItem().get(NeverItemProp.GemId),null);
+                pPlayer.getItemInHand(pUsedHand).set(NeverItemProp.DimensionTypeHeld.get(),null);
                 pPlayer.sendSystemMessage(Component.literal("Cleared "+pPlayer.getMainHandItem().get(NeverItemProp.GemId)));
                 return InteractionResultHolder.success(pPlayer.getItemInHand(pPlayer.getUsedItemHand()));
             }
@@ -99,7 +107,7 @@ public class LinkingGem extends Item implements GemsItemInterface {
         pTooltipComponents.add(1,Component.translatable("tooltip.nevermod.linking_gem"));
         if(Screen.hasShiftDown()){
             getMob(pStack.get(NeverItemProp.GemId));
-            pTooltipComponents.set(1,Component.literal(""+ getMob(pStack.get(NeverItemProp.GemId))));
+            pTooltipComponents.set(1,Component.literal("GemId: "+pStack.get(NeverItemProp.GemId)+" "+ getMob(pStack.get(NeverItemProp.GemId))));
         }
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
     }
