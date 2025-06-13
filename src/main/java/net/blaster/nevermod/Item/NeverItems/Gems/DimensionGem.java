@@ -38,15 +38,12 @@ public class DimensionGem extends Item implements GemsItemInterface {
             if(gemid==-1){registerGem(stack);}
 
         if(pPlayer.isCrouching()){
-            //DimensionMap.put(gemid,null);
             stack.set(NeverItemProp.ServerLevelHeld,null);
-            //pPlayer.getItemInHand(pUsedHand).set(NeverItemProp.DimensionTypeHeld.get(),null);
             pPlayer.sendSystemMessage(Component.literal("Cleared "+gemid));
             return InteractionResultHolder.success(stack);
         }
 
         if(stack.get(NeverItemProp.ServerLevelHeld)==null){
-            //DimensionMap.put(gemid,));
             stack.set(NeverItemProp.ServerLevelHeld,pLevel.dimension());
             pPlayer.sendSystemMessage(Component.literal("set dimension "+stack.get(NeverItemProp.ServerLevelHeld)));
             return InteractionResultHolder.success(stack);
@@ -57,7 +54,6 @@ public class DimensionGem extends Item implements GemsItemInterface {
             }
         pPlayer.sendSystemMessage(Component.literal("go to dimension "+stack.get(NeverItemProp.ServerLevelHeld)));
         pPlayer.changeDimension(pPlayer.getServer().getLevel(stack.get(NeverItemProp.ServerLevelHeld.get())));
-
 
         return InteractionResultHolder.success(stack);
         }

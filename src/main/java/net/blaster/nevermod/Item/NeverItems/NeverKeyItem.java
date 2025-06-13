@@ -1,6 +1,7 @@
 package net.blaster.nevermod.Item.NeverItems;
 
 import net.blaster.nevermod.blocks.ModBlocks;
+import net.blaster.nevermod.blocks.NeverBlocks.NeverDoor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -10,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -22,27 +24,31 @@ public class NeverKeyItem extends Item {
     }
     @Override
     public InteractionResult useOn(UseOnContext pContext) {
-        if(!pContext.getLevel().isClientSide()){
-            //now we are on server side
-            BlockPos clickedPos = pContext.getClickedPos();
-            Player player = pContext.getPlayer();
-            if(pContext.getLevel().getBlockState(clickedPos).getBlock().getClass()==DoorBlock.class){
-                if (player != null) {
-                    player.sendSystemMessage(Component.literal("IS A DOOR"));
-                    DoorBlock db= (DoorBlock) pContext.getLevel().getBlockState(clickedPos).getBlock();
-                    if(db.isOpen(pContext.getLevel().getBlockState(clickedPos))){player.sendSystemMessage(Component.literal("DOOR MUST BE CLOSED"));  return InteractionResult.FAIL; }
-                    if(ModBlocks.NeverDoor.value()== db){player.sendSystemMessage(Component.literal("Already Trasformed"));  return InteractionResult.FAIL; }
-                    pContext.getLevel().setBlockAndUpdate(clickedPos,ModBlocks.NeverDoor.get().withPropertiesOf(pContext.getLevel().getBlockState(clickedPos)));
+        if(pContext.getLevel().isClientSide()){return InteractionResult.PASS;}//now we are on server side
 
-                    return InteractionResult.SUCCESS;
-                }
-            }
-            else {
-                player.sendSystemMessage(Component.literal("IS NOT A DOOR"));
-            }
+        BlockPos clickedPos = pContext.getClickedPos();
+        Player player = pContext.getPlayer();
+        Level level = pContext.getLevel();
+        if(!(level.getBlockState(clickedPos).getBlock() instanceof DoorBlock)){player.sendSystemMessage(Component.literal("IS NOT A DOOR"));return InteractionResult.FAIL;}
 
+        player.sendSystemMessage(Component.literal("IS A DOOR"));
+        DoorBlock db= (DoorBlock) level.getBlockState(clickedPos).getBlock();
+        if (db instanceof NeverDoor) {
+            if(db.isOpen(level.getBlockState(clickedPos))){return InteractionResult.FAIL;}
+            player.sendSystemMessage(Component.literal("Already Trasformed"));
+            db.setOpen(player,level,level.getBlockState(clickedPos), clickedPos,true);
+            return InteractionResult.SUCCESS;
         }
-        return InteractionResult.FAIL;
+        if(db.isOpen(level.getBlockState(clickedPos))){player.sendSystemMessage(Component.literal("DOOR MUST BE CLOSED"));  return InteractionResult.FAIL; }
+        else if(!((level.getBlockState(clickedPos.below()).getBlock() == Blocks.END_STONE) || ((level.getBlockState(clickedPos.below()).getBlock() == ModBlocks.NeverStone.get())))){
+            level.setBlockAndUpdate(clickedPos,ModBlocks.NeverDoor.get().withPropertiesOf(level.getBlockState(clickedPos)));
+            level.destroyBlock(clickedPos.below(),true);
+            return InteractionResult.SUCCESS;
+        }
+        level.setBlockAndUpdate(clickedPos,ModBlocks.NeverDoor.get().withPropertiesOf(level.getBlockState(clickedPos)));
+        level.setBlockAndUpdate(clickedPos.below(),ModBlocks.NeverStone.get().defaultBlockState());
+        return InteractionResult.SUCCESS;
+
     }
 
 

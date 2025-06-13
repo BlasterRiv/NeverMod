@@ -56,7 +56,7 @@ public class TeleportGem extends Item implements GemsItemInterface {
 
             if(pPlayer.isCrouching()){
                 stack.set(NeverItemProp.PositionHeld,pContext.getClickedPos().above());
-                stack.set(NeverItemProp.DimensionTypeHeld.get(),pLevel.dimensionType());
+                stack.set(NeverItemProp.DimensionTypeHeld,pLevel.dimensionType());
                 pPlayer.sendSystemMessage(Component.literal("set on "+stack.get(NeverItemProp.PositionHeld)));
                 return InteractionResult.SUCCESS;
             }
@@ -68,10 +68,10 @@ public class TeleportGem extends Item implements GemsItemInterface {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-
         //spawn a projectile going forwword
        // Player pPlayer = pContext.getPlayer();
        // Level pLevel=pContext.getLevel();
+
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
         if(pLevel instanceof ServerLevel serverlevel){
             int gemid=stack.get(NeverItemProp.GemId);
@@ -83,15 +83,13 @@ public class TeleportGem extends Item implements GemsItemInterface {
                 pPlayer.sendSystemMessage(Component.literal("Cleared "+gemid));
                 return InteractionResultHolder.success(pPlayer.getItemInHand(pPlayer.getUsedItemHand()));
             }
-            if(stack.get(NeverItemProp.DimensionTypeHeld)!=pLevel.dimensionType())
-            {pPlayer.sendSystemMessage(Component.literal("can only teleport withen same diemension"));
+            if(stack.get(NeverItemProp.DimensionTypeHeld.get())!=pLevel.dimensionType()) {
+                pPlayer.sendSystemMessage(Component.literal("can only teleport withen same diemension"));
                 return InteractionResultHolder.fail(pPlayer.getItemInHand(pPlayer.getUsedItemHand()));
             }
             BlockPos blockPos=stack.get(NeverItemProp.PositionHeld);
             pPlayer.teleportTo(blockPos.getX(),blockPos.getY(),blockPos.getZ());
-            //pLevel.gameEvent(GameEvent.PROJECTILE_SHOOT, new Vec3(pPlayer.getX(),pPlayer.getY(),pPlayer.getZ()),GameEvent.Context.of(pPlayer));
             pPlayer.sendSystemMessage(Component.literal(pPlayer.level().dimension().toString()));
-            //pLevel.addFreshEntity();
             return InteractionResultHolder.success(pPlayer.getItemInHand(pPlayer.getUsedItemHand()));
         }
 
