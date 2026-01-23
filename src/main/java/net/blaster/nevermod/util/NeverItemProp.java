@@ -5,113 +5,145 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.blaster.nevermod.NeverMod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.dimension.DimensionType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.HashMap;
 import java.util.function.UnaryOperator;
 
 public class NeverItemProp {
 
-    public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPE= DeferredRegister.createDataComponents(NeverMod.MOD_ID);
+  public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPE = DeferredRegister
+      .createDataComponents(NeverMod.MOD_ID);
 
-    public record GemRecord(int gem_id) {
-    }
-    public static final Codec<GemRecord> GemCodec = RecordCodecBuilder.create(
-            instance -> instance.group(
-                    Codec.INT.fieldOf("gem_id").forGetter(GemRecord::gem_id)
-            ).apply(instance, GemRecord::new)
-    );
+  public record GemRecord(int gem_id) {
+  }
 
+  // public static final Codec<GemRecord> GemCodec = RecordCodecBuilder.create(
+  // instance -> instance.group(
+  // Codec.INT.fieldOf("gem_id").forGetter(GemRecord::gem_id)).apply(instance,
+  // GemRecord::new));
+  // BlockPos#CODEC is a Codec<BlockPos>
+  // public static final Codec<HashMap<String, BlockPos>> MAP_CODEC =
+  // Codec.unboundedMap(Codec.STRING, BlockPos.CODEC);
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> GemId = register("gem_id",
+      (builder) -> (builder.persistent(Codec.INT)));
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> PositionHeld = register(
+      "position_held", (builder) -> (builder.persistent(BlockPos.CODEC)));
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<ResourceKey<Level>>> DimensionHeld = register(
+      "dimension_rk_held", (builder) -> (builder.persistent(ResourceKey.codec(Registries.DIMENSION))));
+  // public static final DeferredHolder<DataComponentType<?>,
+  // DataComponentType<ResourceKey<ENTITY_TYPE>>> MobHeld = register(
+  // "dimension_rk_held", (builder) ->
+  // (builder.persistent(ResourceKey.codec(Registries.ENTITY_TYPE))));
 
-    public static final DeferredHolder<DataComponentType<?>,DataComponentType<Integer>> GemId = register("gem_id", (builder) ->  (builder.persistent(GemCodec.INT)) );
-    public static final DeferredHolder<DataComponentType<?>,DataComponentType<BlockPos>>  PositionHeld = register("position_held", (builder) ->  (builder.persistent(BlockPos.CODEC)) );
-    public static final DeferredHolder<DataComponentType<?>,DataComponentType<DimensionType>> DimensionTypeHeld = register("dimensiontype_held", (builder) ->  (builder.persistent(DimensionType.DIRECT_CODEC)) );
-    public static final DeferredHolder<DataComponentType<?>,DataComponentType<ResourceKey<Level>>> ServerLevelHeld = register("serverlevel_held", (builder) ->  (builder.persistent(ServerLevel.RESOURCE_KEY_CODEC)) );
-    //public static final DeferredHolder<DataComponentType<?>,DataComponentType<Mob>> Mobheld=register("mobheld", (mobBuilder) ->  (mobBuilder.persistent(myMobCodec2)) );
+  /*
+   * public static final Codec<DimensionTransition> RECORD_CODEC =
+   * RecordCodecBuilder.create(instance -> instance.group(
+   * ServerLevel.RESOURCE_KEY_CODEC,
+   * Vec3.CODEC,
+   * Vec3.CODEC,
+   * Codec.FLOAT.fieldOf("yRot"),
+   * Codec.FLOAT.fieldOf("xRot"),
+   * Codec.PASSTHROUGH.mapResult));
+   */
+  // public static final DeferredHolder<DataComponentType<?>,
+  // DataComponentType<DimensionTransition>> DimensiontTransition =
+  // register("dimenstion_transition_held", (builder) ->
+  // (builder.persistent(RECORD_CODEC)));
+  // public static finala
+  // DeferredHolder<DataComponentType<?>,DataComponentType<Mob>>
+  // Mobheld=register("mobheld", (mobBuilder) ->
+  // (mobBuilder.persistent(myMobCodec2)) );
 
-    private static <T>DeferredHolder<DataComponentType<?>,DataComponentType<T>> register(String name, UnaryOperator<DataComponentType.Builder<T>> builderUnaryOperator)
-    {return DATA_COMPONENT_TYPE.register(name,()->builderUnaryOperator.apply(DataComponentType.builder()).build()); }
+  private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,
+      UnaryOperator<DataComponentType.Builder<T>> builderUnaryOperator) {
+    return DATA_COMPONENT_TYPE.register(name, () -> builderUnaryOperator.apply(DataComponentType.builder()).build());
+  }
 
-    public static void register(IEventBus eventBus){
-        DATA_COMPONENT_TYPE.register(eventBus);
-    }
+  public static void register(IEventBus eventBus) {
+    DATA_COMPONENT_TYPE.register(eventBus);
+  }
 
-
-    public static void addCustomItemProp(){
-        //ItemProperties.register(ModItems.LinkingGem.get(), new ResourceLocation(NeverMod.MOD_ID,"mobHeld"),(stack)->stack.get());
-    }
+  public static void addCustomItemProp() {
+    // ItemProperties.register(ModItems.LinkingGem.get(), new
+    // ResourceLocation(NeverMod.MOD_ID,"mobHeld"),(stack)->stack.get());
+  }
 }
 
 //
-//    public record GemRecord(Mob MobHeld) {
-//        Mob getM(){return MobHeld;}
-//        void setM(Mob m){MobHeld=m;}
-//    }
-//static Mob mobdef=null;
-//static GemRecord gr=new GemRecord(mobdef);
+// public record GemRecord(Mob MobHeld) {
+// Mob getM(){return MobHeld;}
+// void setM(Mob m){MobHeld=m;}
+// }
+// static Mob mobdef=null;
+// static GemRecord gr=new GemRecord(mobdef);
 
-//    private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, NeverMod.MOD_ID);
+// private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES =
+// DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES,
+// NeverMod.MOD_ID);
 //
-//    private static final DeferredHolder<AttachmentType<?>,AttachmentType<Mob>> MobAttachment = ATTACHMENT_TYPES.register(
-//            "mobheld", () -> AttachmentType.builder(()->0).serialize(Codec.Mob).build()
-//    );
+// private static final DeferredHolder<AttachmentType<?>,AttachmentType<Mob>>
+// MobAttachment = ATTACHMENT_TYPES.register(
+// "mobheld", () -> AttachmentType.builder(()->0).serialize(Codec.Mob).build()
+// );
 
-//private static final StreamCodec<ByteBuf,GemRecord> GemCodec= StreamCodec.unit(new GemRecord(mobdef));
+// private static final StreamCodec<ByteBuf,GemRecord> GemCodec=
+// StreamCodec.unit(new GemRecord(mobdef));
 
-//    public static final Codec<GemRecord> GemCodec = RecordCodecBuilder.create(instance ->
-//            instance.group(
-//                    Codec.unit(mobdef).fieldOf("mobheld").forGetter(GemRecord::MobHeld)
-//            ).apply(instance, GemRecord::new)
-//    );
+// public static final Codec<GemRecord> GemCodec =
+// RecordCodecBuilder.create(instance ->
+// instance.group(
+// Codec.unit(mobdef).fieldOf("mobheld").forGetter(GemRecord::MobHeld)
+// ).apply(instance, GemRecord::new)
+// );
 
+// public static final Codec<Mob> MobCodec2 =
+// Codec.lazyInitialized(()->Codec.unit(mobdef));
 
-
-//public static final Codec<Mob> MobCodec2 = Codec.lazyInitialized(()->Codec.unit(mobdef));
-
-//    public static final Codec<Mob> myMobCodec = new Codec<Mob>() {
-//        GemRecord gemRecord=new GemRecord(null);
-//        Mob mob=null;
-//        @Override
-//        public <T> DataResult<T> encode(Mob input, DynamicOps<T> ops, T prefix) {
+// public static final Codec<Mob> myMobCodec = new Codec<Mob>() {
+// GemRecord gemRecord=new GemRecord(null);
+// Mob mob=null;
+// @Override
+// public <T> DataResult<T> encode(Mob input, DynamicOps<T> ops, T prefix) {
 //
-//            return ops.set(ops.getMap(),input.getEncodeId(),input);
-//        }
+// return ops.set(ops.getMap(),input.getEncodeId(),input);
+// }
 //
-//        @Override
-//        public <T> DataResult<Pair<Mob, T>> decode(DynamicOps<T> ops, T input) {
-//            return ops.get(input,);
-//        }
-//    };
-//    public static final Codec<Mob> myMobCodec = new Codec<Mob>() {
+// @Override
+// public <T> DataResult<Pair<Mob, T>> decode(DynamicOps<T> ops, T input) {
+// return ops.get(input,);
+// }
+// };
+// public static final Codec<Mob> myMobCodec = new Codec<Mob>() {
 //
-//    @Override
-//    public <T> DataResult<T> encode(Mob input, DynamicOps<T> ops, T prefix) {
-//        return DataResult.success(ops.set(prefix,input.getEncodeId(),prefix));
-//    }
+// @Override
+// public <T> DataResult<T> encode(Mob input, DynamicOps<T> ops, T prefix) {
+// return DataResult.success(ops.set(prefix,input.getEncodeId(),prefix));
+// }
 //
-//    @Override
-//    public <T> DataResult<Pair<Mob, T>> decode(DynamicOps<T> ops, T input) {
-//        return  DataResult.success(new Pair<>((Mob) input, input));
-//    }
+// @Override
+// public <T> DataResult<Pair<Mob, T>> decode(DynamicOps<T> ops, T input) {
+// return DataResult.success(new Pair<>((Mob) input, input));
+// }
 //
-//    };
+// };
 //
-//    public static final Codec<Mob> myMobCodec2 = new Codec<Mob>() {
-//        Mob mob;
-//        @Override
-//        public <T> DataResult<T> encode(Mob input, DynamicOps<T> ops, T prefix) {
-//            mob=input;
-//            System.out.println("enc");
-//            return (DataResult<T>) DataResult.success(mob);
-//        }
+// public static final Codec<Mob> myMobCodec2 = new Codec<Mob>() {
+// Mob mob;
+// @Override
+// public <T> DataResult<T> encode(Mob input, DynamicOps<T> ops, T prefix) {
+// mob=input;
+// System.out.println("enc");
+// return (DataResult<T>) DataResult.success(mob);
+// }
 //
-//        @Override
-//        public <T> DataResult<Pair<Mob, T>> decode(DynamicOps<T> ops, T input) {
-//            return DataResult.success(new Pair<>(mob,input));
-//        }
-//    };
+// @Override
+// public <T> DataResult<Pair<Mob, T>> decode(DynamicOps<T> ops, T input) {
+// return DataResult.success(new Pair<>(mob,input));
+// }
+// };

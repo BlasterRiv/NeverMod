@@ -15,14 +15,16 @@ import java.util.function.BiConsumer;
 
 public class NeverBlockStateProvider extends BlockStateProvider {
 
+  public NeverBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
+    super(output, NeverMod.MOD_ID, exFileHelper);
+  }
 
-    public NeverBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
-        super(output, NeverMod.MOD_ID, exFileHelper);
-    }
-
-    @Override
-    protected void registerStatesAndModels() {
-        simpleBlockWithItem(ModBlocks.NeverStone.get(),cubeAll(ModBlocks.NeverStone.get()));
-        doorBlockWithRenderType(ModBlocks.NeverDoor.get(), ModBlocks.NeverDoor.get().getName().getString(),new ResourceLocation(blockTexture(ModBlocks.NeverStone.get()).getNamespace(),blockTexture(ModBlocks.NeverStone.get()).getPath().replaceFirst("stone","door_bottom")),new ResourceLocation(blockTexture(ModBlocks.NeverStone.get()).getNamespace(),blockTexture(ModBlocks.NeverStone.get()).getPath().replaceFirst("stone","door_top")),"minecraft:cutout");
-    }
+  @Override
+  protected void registerStatesAndModels() {
+    simpleBlockWithItem(ModBlocks.NeverStone.get(), cubeAll(ModBlocks.NeverStone.get()));
+    doorBlockWithRenderType(ModBlocks.NeverDoor.get(), ModBlocks.NeverDoor.get().getName().getString(),
+        modLoc(blockTexture(ModBlocks.NeverStone.get()).getPath().replaceFirst("stone", "door_bottom")),
+        modLoc(blockTexture(ModBlocks.NeverStone.get()).getPath().replaceFirst("stone", "door_top")),
+        "minecraft:cutout");
+  }
 }
