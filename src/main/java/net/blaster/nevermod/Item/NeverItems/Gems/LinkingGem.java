@@ -16,11 +16,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.portal.DimensionTransition;
-import net.minecraft.server.level.TicketType;
-import net.minecraft.core.BlockPos;
 import org.jetbrains.annotations.NotNull;
-import net.minecraft.world.level.ChunkPos;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,20 +91,20 @@ public class LinkingGem extends Item implements GemsItemInterface {
     // .sendSystemMessage(Component.literal(" to x: " + ogMob.getX() + "y: " +
     // ogMob.getY() + "z: " + ogMob.getZ()));
     // newMob.teleportTo(ogMob.getX(), ogMob.getY(), ogMob.getZ());
-    // newMob.moveTo(ogMob.getX(), ogMob.getY(), ogMob.getZ());
+    newMob.teleportTo(ogMob.getX(), ogMob.getY(), ogMob.getZ());
     // level.getServer().getPlayerList().getPlayerByName("BlasterRiv").sendSystemMessage(Component.literal("move"));pPlayer.changeDimension(
 
-    BlockPos blockPos = BlockPos.containing(ogMob.getX(), ogMob.getY(), ogMob.getZ());
-    newMob.changeDimension(
-        new DimensionTransition(level, blockPos.getCenter(),
-            newMob.getDeltaMovement(), newMob.getRotationVector().y, newMob.getRotationVector().x,
-            DimensionTransition.PLACE_PORTAL_TICKET));
+    // BlockPos blockPos = BlockPos.containing(ogMob.getX(), ogMob.getY(),
+    // ogMob.getZ());
+    // newMob.changeDimension( new DimensionTransition(level,
+    // blockPos.getCenter(),newMob.getDeltaMovement(), newMob.getRotationVector().y,
+    // newMob.getRotationVector().x,DimensionTransition.PLACE_PORTAL_TICKET));
 
     // level.getChunkSource().addRegionTicket(TicketType.POST_TELEPORT,
     // new ChunkPos(BlockPos.containing(ogMob.getX(), ogMob.getY(), ogMob.getZ())),
     // (int) newMob.distanceTo(ogMob), 31, true);
     // level.getServer().getPlayerList().getPlayerByName("BlasterRiv").sendSystemMessage(Component.literal("ticket"));
-    newMob.teleportTo(tempPostion[0], tempPostion[1], tempPostion[2]);
+    ogMob.teleportTo(tempPostion[0], tempPostion[1], tempPostion[2]);
     return newMob;
   }
 

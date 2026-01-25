@@ -8,22 +8,14 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.properties.*;
-import net.minecraft.world.level.dimension.DimensionType;
-import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.phys.Vec3;
 
-import java.awt.*;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TeleportGem extends Item implements GemsItemInterface {
   // private final Map<Integer, BlockPos> BlockPosMap;
@@ -50,7 +42,7 @@ public class TeleportGem extends Item implements GemsItemInterface {
     Level pLevel = pContext.getLevel();
     InteractionHand pUsedHand = pContext.getHand();
     ItemStack stack = pPlayer.getItemInHand(pUsedHand);
-    if (pLevel instanceof ServerLevel serverlevel) {
+    if (pLevel instanceof ServerLevel) {
       int gemid = stack.get(NeverItemProp.GemId);
       if (gemid == -1) {
         registerGem(pPlayer.getItemInHand(pUsedHand));
@@ -75,7 +67,7 @@ public class TeleportGem extends Item implements GemsItemInterface {
     // Level pLevel=pContext.getLevel();
 
     ItemStack stack = pPlayer.getItemInHand(pUsedHand);
-    if (pLevel instanceof ServerLevel serverlevel) {
+    if (pLevel instanceof ServerLevel) {
       int gemid = stack.get(NeverItemProp.GemId);
       if (gemid == -1) {
         registerGem(pPlayer.getItemInHand(pUsedHand));

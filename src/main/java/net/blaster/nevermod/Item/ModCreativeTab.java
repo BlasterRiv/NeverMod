@@ -10,32 +10,29 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModCreativeTab {
-    public static final DeferredRegister<CreativeModeTab> MOD_CREATIVE_MODE_TAB = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, NeverMod.MOD_ID);
+  public static final DeferredRegister<CreativeModeTab> MOD_CREATIVE_MODE_TAB = DeferredRegister
+      .create(Registries.CREATIVE_MODE_TAB, NeverMod.MOD_ID);
 
-    public static final DeferredHolder<CreativeModeTab,CreativeModeTab> CREATIVE_MODE_TAB =
-             MOD_CREATIVE_MODE_TAB.register(
-                     "never_tab",
-                     ()->CreativeModeTab.builder()
-                             .icon(()->new ItemStack(ModItems.NeverKey.get()))
-                             .title(Component.translatable("creativetab.never_tab"))
-                             .displayItems((pParameters, pOutput) ->{
-                                 pOutput.accept(ModItems.NeverKey.get());
-                                 pOutput.accept(ModItems.PowerGem.get());
-                                 pOutput.accept(ModItems.DimensionGem.get());
-                                 pOutput.accept(ModItems.TeleportGem.get());
-                                 pOutput.accept(ModItems.LinkingGem.get());
+  public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CREATIVE_MODE_TAB = MOD_CREATIVE_MODE_TAB
+      .register(
+          "never_tab",
+          () -> CreativeModeTab.builder()
+              .icon(() -> new ItemStack(ModItems.NeverKey.get()))
+              .title(Component.translatable("creativetab.never_tab"))
+              .displayItems((pParameters, pOutput) -> {
+                pOutput.accept(ModItems.NeverKey.get());
+                pOutput.accept(ModItems.AbsorbGem.get());
+                pOutput.accept(ModItems.DimensionGem.get());
+                pOutput.accept(ModItems.TeleportGem.get());
+                pOutput.accept(ModItems.LinkingGem.get());
 
+                pOutput.accept(ModBlocks.NeverStone.get());
+                pOutput.accept(ModBlocks.NeverDoor.get());
 
-                                 pOutput.accept(ModBlocks.NeverStone.get());
-                                 pOutput.accept(ModBlocks.NeverDoor.get());
+                pOutput.accept(ModItems.AncientGold.get());
+                pOutput.accept(ModItems.RawAncientGold.get());
 
-                                 pOutput.accept(ModItems.AncientGold.get());
-                                 pOutput.accept(ModItems.RawAncientGold.get());
-
-
-                             })
-                             .build()
-             );
+              })
+              .build());
 
 }
-
