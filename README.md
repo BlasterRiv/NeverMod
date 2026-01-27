@@ -1,55 +1,67 @@
-
 Never Mod
-=
+==
 Currently in-development and not in a playable state
 
-A self-contained mod, that (hopefully) has a few mobs, current plans is a few piglin variants and two bosses, one structure or a few rooms added to vainilla structures, Gems(Items) with abilities to reward your bravery, and a Dimension 
+A self-contained mod, that (hopefully) has; a few Enemies, some Bosses, Dungeons/rooms added to vanilla structures, a few Items with unique abilities, and a new Dimension. 
 
+You can acquire Gems by overcoming dungeons or Bosses, theses Gems have abilities to reward your bravery, once you have all the Gems(thanos style) and *the Gold that pigs fears*, you can build a contraption that combines them into a key to *the place that never was*dimension, where you fight the Big Boss, which is conveniently the only way unlock the key's final ability (funny how life works :3).
 
-You can acquire Gems by overcoming dungeons or Bosses, once you have all the Gems(thanos style) and Gold that pigs fears, you can build a contraption that combines them into a key to the final Dimension, where you fight the big Boss, which is conveniently the only way unlock the key's final ability (funny how life works :3)
+Plans
+====
+### Current Plans
+#### Mobs
+- a few piglin variants
+- 2 or 3 bosses, 
+#### Items 
+- Gems with unique abilities
+- Key that leads to dimension and has abilities
+#### Places
+- Two dungeons or one dungeon with rooms added to vanilla structures, 
+- a new Dimension. 
 
+### Status
+##### Version
+Current version: 0.0.9 <br>
 NeoForge version: '2.0.139'
-current version: 0.0.9
-versioning: x.y.z(.ab.cc)
-x: 'Extra stuff'>1>'stuff still needs to be done'
-y: major feature milestone(all Mobs are functional)
-z: minor feature milesstone(a mob is functional)
-a: development signficant part of a feature(minor or major)
-b: development minor part of a feature or base implmentation of a deature
+###### Versioning: x.y.z(.ab.cc):
+x: 'Extra stuff' > 1 > 'stuff still needs to be done'<br>
+y: major feature milestone(ex: all Mobs are functional)<br>
+z: minor feature milestone(ex: a mob is functional)<br>
+a: development significant part of a feature(minor or major)<br>
+b: development minor part of a feature or base implementation of a feature<br>
 c: development bug fixes
 
-##### usable features
-features that are currently
-all of these features work as intended, (most are only accessible in creative mode)
+##### Features
+###### Usable features
+features that are currently work as intended, (most are only accessible in creative mode).
 - TeleportGem
 - LinkedGem
 
-##### functional features
-These features dont work as intended but there core functionality work, when a feature relies on another that is either nonfunctional or yet to be implemented
+###### Functional features
+These features don't work as intended but there core functionality work, when a feature relies on another that is either nonfunctional or yet to be implemented.
 - DimensionGem
 
-##### non functional
-these features are currently being implemented, but doesnt function or game breaking.
+###### Non-functional
+these features are currently being implemented, but doesn't function or are game breaking.
 - AbsorptionGem
 - Never_Key
 - Ancient_Gold
 - NeverDoor
 
-##### not yet implemented
+###### Not yet implemented
 - Mobs
 - Structures
 - Never(Dimension)
-- Forge
+- Forge Contraption
 
-###### Other Mod Loaders:
-I would like to port the mod to fabric and Quilt eventually, but have no idea when/if that will happen
+
+>Other Mod Loaders: I would like to port the mod to fabric and Quilt eventually, but have no idea when/if that will happen
 
 Installation information
 =======
-to use only
-a jar will be provided in the future but for now you need to build it your self
+In the future a jar will be provided but for now you need to build it your self
 
-to use only:
+To use only:
 1. Download to project
 	- via git 
 		1. in a terminal run `git clone https://github.com/BlasterRiv/NeverMod`
@@ -57,17 +69,15 @@ to use only:
 		1. click the green Code button
 		2. click Download ZIP
 		3. extract to directory of your choosing
-2. in a terminal change to project directory 
+2. In a terminal change to project directory 
 	- `cd /*REPLACE-WITH-PATH-TO-PROJECT*/NeverMod` 
-3. to build the JAR, run the following in the terminal
-	1. ./gradlew build 
-	2. Jar can now be found at the build\libs directory
-	
-	- (Alternatively you can run the following to just run it)./gradlew runClient
-4. put the jar in your usual .minecraft mod directory
-5. find bugs!
+3. Build the JAR, run the following in the terminal
+	1. `./gradlew build`
+	2. Jar can now be found at the build/libs directory
+4. Put the jar in your usual .minecraft mod directory
+5. Find bugs!
 
-to edit and use:
+To edit and use:
 1. Download to project
 	- via git 
 		1. in a terminal run `git clone https://github.com/BlasterRiv/NeverMod`
@@ -75,13 +85,13 @@ to edit and use:
 		1. click the green Code button
 		2. click Download ZIP
 		3. extract to directory of your choosing
-2. in a terminal change to project directory 
+2. In a terminal change to project directory 
 	- `cd /*REPLACE-WITH-PATH-TO-PROJECT*/NeverMod` 
-3. run the following in the terminal
+3. Run the following in the terminal
 	- run `./gradlew task` To see available gradle Tasks
 	- modify desired code
-	- finally run `./gradlew runClient` To see available gradle Tasks``
-4. find bugs!
+	- finally run `./gradlew runClient`
+4. Find bugs!
 
 
 > **Note**: For Eclipse, use tasks in `Launch Group` instead of ones founds in `Java Application`. A preparation task must run before launching the game. NeoGradle uses launch groups to do these subsequently.
@@ -89,34 +99,32 @@ to edit and use:
 
 > Note: If at any point you are missing libraries in your IDE, or you've run into problems you can run `./gradlew --refresh-dependencies` to refresh the local cache. `./gradlew clean` to reset everything {this does not affect your code} and then start the process again.
 
-HEY!! WHAT ARE YOU DOING! DON'T WATCH THAT, IT HAS SPOILERS!:
-======
-this is a just demo of some of the abilities so far, and they are expected to change especially the Dimension_Gem, you will not be able to use it like this in the future
-![[DEMO.mp4]]
-![[image]]
-
-
-
 Contributions
-bug fixes: you can submit a pull request for an existing issue, or  create one first if it doesn't exist, that exist, guidelines:
-- a pull request should address one issue
-- keep fixes as small as possible
-- fixes shouldn't change the structure of the project, unless absolutely necessary
-adding features() 
-please open a feature request before working on it, I have a vision of what the mod should look like, but i would love to incorporate other ideas into the mod, so opening the request before hand gives us the change to try and integrate the ideas in to the mod without changing its identity   
+======
+##### Adding features
+Please start a feature request discussions before working on anything, I would love to incorporate other ideas into the mod, but I have a vision i would like to preserve, opening the discussion before hand gives us the chance to talk about the idea, and try to integrate it into the mod without changing its identity.
+##### Bug fixes: 
+you can submit a pull request for an existing issue, or create one first if it doesn't exist
+###### Guidelines:
+- Changes shouldn't be bundled together, ideally a pull request should address one issue
+- Changes should only be as big as the need to be
+- Don't change the structure of the project, unless absolutely necessary
+- Include a description of how the change fixes the issue, no need to get into details, just what caused the issue(if the causes was unknown beforehand), and how the change fixes it.
 
+---
+#### HEY!! WHAT ARE YOU DOING! DON'T WATCH THAT, IT HAS SPOILERS!:
 
+This is a just demo of some of the abilities so far, and they are expected to changed especially the Dimension_Gem, which you will not be able to use it like this in the future
+<video src="DEMO.mp4" width="320" height="240" controls></video>
 
 ___
-#### Additional Resources: 
+Additional Resources: 
+======
 Community Documentation: https://docs.neoforged.net/  
 NeoForged Discord: https://discord.neoforged.net/
 
 [Template information](https://github.com/NeoForgeMDKs/MDK-1.20.6-NeoGradle)
 this project used NeoGradle-1.20.6 at first, but now changed to use ModDevGradle-1.21.1
-
-
-
 
 ##### Mapping Names:
 
