@@ -7,6 +7,9 @@ A self-contained mod, that (hopefully) has; a few Enemies, some Bosses, Dungeons
 You can acquire Gems by overcoming dungeons or Bosses, theses Gems have abilities to reward your bravery, once you have all the Gems(thanos style) and *the Gold that pigs fears*, you can build a contraption that combines them into a key to *the place that never was*dimension, where you fight the Big Boss, which is conveniently the only way unlock the key's final ability (funny how life works :3).
 
 Plans
+
+
+
 ====
 ### Current Plans
 #### Mobs
@@ -115,7 +118,7 @@ you can submit a pull request for an existing issue, or create one first if it d
 #### HEY!! WHAT ARE YOU DOING! DON'T WATCH THAT, IT HAS SPOILERS!:
 
 This is a just demo of some of the abilities so far, and they are expected to changed especially the Dimension_Gem, which you will not be able to use it like this in the future
-<video src="DEMO.mp4" width="320" height="240" controls></video>
+<video src="https://github.com/user-attachments/assets/42d2728d-9cb8-4e89-8977-c20c9033c090" width="320" height="240" controls></video>
 
 ___
 Additional Resources: 
